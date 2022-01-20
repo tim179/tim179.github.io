@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Project Blog</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" type="text/css" media="screen" href="styles/main.css" />
+    <link rel="stylesheet" type="text/css" media="screen" href="styles/image-viewer.css" />
+</head>
+<body>
+   <section id="image-modal" class="image-modal">
+        <section id="image-modal-content-box" class="image-modal-content-box">
+            <button class="close">&times</button>
+            <img>
+        </section>
+    </section>
+    <main>
+        <nav class="card">
+            <header>Projects</header>
+            <a href="movieflix.html" class="current">Movieflix</a>
+            <a href="moon_walk.html">Moon Walk</a>
+            <a href="quiz_maker.html">Quiz Maker</a>
+        </nav>
+        <section id="blog" class="blog">
+            <article class="card blog-post">
+                <header><h1>Movieflix</h1></header>
+                <p>
+                    Developed the website and server for a mock movie rental webservice together with a team of five. Registered users can receive customised movie recommendations, rate movies and search for movies to purchase or rent. Built using PostgreSQL, Python Flask, and ReactJS.
+                </p>
+                <section class="blog-post-figure">
+                    <img src="images/movieflix1.png">
+                    <span> Main Page </span>
+                </section>
+                <section class="blog-post-figure" >
+                    <video controls preload="metadata">
+                        <source src="videos/movieflix.mp4#t=0.1" type="video/mp4">
+                        Your browser does not support the video tag.
+                    </video>
+                    <span> Video Demo </span>
+                </section>
+                <section class="blog-post-feature">
+                    <p>
+                        <b>Find Your Movie:</b>
+                        Search for movies by title, genre, keywords or overview. Results can be sorted by relevance, title, rating and date.
+                    </p>
+                    <section class="blog-post-figure">
+                        <img src="images/movieflix2.png">
+                        <span> Search by Title </span>
+                    </section>
+                    <section class="blog-post-figure">
+                        <img src="images/movieflix3.png">
+                        <span> Search by Genre </span>
+                    </section>
+                    <section class="blog-post-figure">
+                        <img src="images/movieflix4.png">
+                        <span> Sort Results </span>
+                    </section>
+                </section>
+                <section class="blog-post-feature">
+                    <p>
+                        <b>Rent or Purchase a Movie:</b>
+                    </p>
+                    <section class="blog-post-figure">
+                        <img src="images/movieflix6.png">
+                        <span> Movie Page </span>
+                    </section>
+                    <section class="blog-post-figure">
+                        <img src="images/movieflix7.png">
+                        <span> Confirm Rental </span>
+                    </section>
+                    <section class="blog-post-figure">
+                        <img src="images/movieflix9.png">
+                        <span> User Cart </span>
+                    </section>
+                    <section class="blog-post-figure">
+                        <img src="images/movieflix10.png">
+                        <span> Payment </span>
+                    </section>
+                    <section class="blog-post-figure">
+                        <img src="images/movieflix11.png">
+                        <span> Rented Movie </span>
+                    </section>
+                </section>
+                <section class="blog-post-feature">
+                    <p>
+                        <b>Give a Rating:</b>
+                        Rate movies you have watched to help receive better movie recommendations.
+                    </p>
+                    <section class="blog-post-figure">
+                        <img src="images/movieflix12.png">
+                        <span> Rate a Movie </span>
+                    </section>
+                </section>
+                <section class="blog-post-feature">
+                    <p>
+                        <b>Take a Survey:</b>
+                        Users can customise their recommendations by specifying a list of preferred genres.
+                    </p>
+                    <section class="blog-post-figure">
+                        <img src="images/movieflix13.png">
+                        <span> Preference Survey </span>
+                    </section>
+                    <section class="blog-post-figure">
+                        <img src="images/movieflix15.png">
+                        <span> Edit Preference </span>
+                    </section>
+                    <section class="blog-post-figure">
+                        <img src="images/movieflix16.png">
+                        <span> Updated Recommendations </span>
+                    </section>
+                </section>
+                 <section class="blog-post-feature">
+                    <p>
+                        <b>Administration:</b>
+                        Administrators can view a movie's information, sales records and edit or add new movies to the database.
+                    </p>
+                    <section class="blog-post-figure">
+                        <img src="images/movieflix17.png">
+                        <span> Admin Controls </span>
+                    </section>
+                    <section class="blog-post-figure">
+                        <img src="images/movieflix18.png">
+                        <span> Movie Editing Form </span>
+                    </section>
+                </section>
+            </article>
+            <article class="card blog-post">
+                <header><h1>Contact</h1></header>
+                <p>
+                    Email: <a href="mailto: tim.fu00@gmail.com">tim.fu00@gmail.com</a>
+                </p>
+            </article>
+        </section>
+    </main>
+    <script src="src/blog.js"></script>
+    <script src="src/image-viewer.js"></script>
+</body>
+</html>

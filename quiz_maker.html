@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Project Blog</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" type="text/css" media="screen" href="styles/main.css" />
+    <link rel="stylesheet" type="text/css" media="screen" href="styles/image-viewer.css" />
+</head>
+<body>
+    <section id="image-modal" class="image-modal">
+        <section id="image-modal-content-box" class="image-modal-content-box">
+            <button class="close">&times</button>
+            <img>
+        </section>
+    </section>
+    <main>
+        <nav class="card">
+            <header>Projects</header>
+            <a href="movieflix.html">Movieflix</a>
+            <a href="moon_walk.html">Moon Walk</a>
+            <a href="quiz_maker.html" class="current">Quiz Maker</a>
+        </nav>
+        <section id="blog" class="blog">
+            <article class="card blog-post">
+                <header><h1>Quiz Maker</h1></header>
+                <p>
+                    Created the website for a toy quiz webservice. Registered users can make their own quizzes and host play sessions where others can join to take the quiz. Built using ReactJS.
+                </p>
+                <section class="blog-post-figure">
+                    <img src="images/quiz_maker1.png">
+                    <span> User Dashboard </span>
+                </section>
+                <section class="blog-post-feature">
+                    <p>
+                        <b>Create Your Own Quizzes:</b>
+                        The user can set the question, answers, time limit and points for each question. They can also choose to embed an image or link to a YouTube video.
+                    </p>
+                    <section class="blog-post-figure">
+                        <img src="images/quiz_maker3.png">
+                        <span> Quiz Page </span>
+                    </section>
+                    <section class="blog-post-figure">
+                        <img src="images/quiz_maker2.png">
+                        <span> Question Form </span>
+                    </section>
+                <section class="blog-post-feature">
+                    <p>
+                        <b>Start a Session:</b>
+                        The user can create play sessions for their quizzes. Players can join by using the session code.
+                    </p>
+                    <section class="blog-post-figure">
+                        <img src="images/quiz_maker4.png">
+                        <span> Active Session </span>
+                    </section>
+                    <section class="blog-post-figure">
+                        <img src="images/quiz_maker6.png">
+                        <span> Host's View of Quiz</span>
+                    </section>
+                </section>
+                <section class="blog-post-feature">
+                    <p>
+                        <b>Play a Quiz:</b>
+                        Join a quiz session and answer the questions within the time limit.
+                    </p>
+                    <section class="blog-post-figure">
+                        <img src="images/quiz_maker5.png">
+                        <span> Join a Session </span>
+                    </section>
+                    <section class="blog-post-figure">
+                        <img src="images/quiz_maker7.png">
+                        <span> Player's View of Quiz</span>
+                    </section>
+                </section>
+                <section class="blog-post-feature">
+                    <p>
+                        <b>View Results:</b>
+                        At end of quiz players can see how well they performed and the host can see how well the players have done overall.
+                    </p>
+                    <section class="blog-post-figure">
+                        <img src="images/quiz_maker8.png">
+                        <span> Host's View of Results </span>
+                    </section>
+                    <section class="blog-post-figure">
+                        <img src="images/quiz_maker9.png">
+                        <span> Player's View of Results</span>
+                    </section>
+                </section>
+            </article>
+            <article class="card blog-post">
+                <header><h1>Contact</h1></header>
+                <p>
+                    Email: <a href="mailto: tim.fu00@gmail.com">tim.fu00@gmail.com</a>
+                </p>
+            </article>
+        </section>
+    </main>
+    <script src="src/blog.js"></script>
+    <script src="src/image-viewer.js"></script>
+</body>
+</html>

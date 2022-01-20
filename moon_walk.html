@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Project Blog</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" type="text/css" media="screen" href="styles/main.css" />
+    <link rel="stylesheet" type="text/css" media="screen" href="styles/image-viewer.css" />
+</head>
+<body>
+   <section id="image-modal" class="image-modal">
+        <section id="image-modal-content-box" class="image-modal-content-box">
+            <button class="close">&times</button>
+            <img>
+        </section>
+    </section>
+    <main>
+        <nav class="card">
+            <header>Projects</header>
+            <a href="movieflix.html">Movieflix</a>
+            <a href="moon_walk.html" class="current">Moon Walk</a>
+            <a href="quiz_maker.html">Quiz Maker</a>
+        </nav>
+        <section id="blog" class="blog">
+            <article class="card blog-post">
+                <header><h1>Moon Walk</h1></header>
+                <p>
+                    Created a game simulating the motion of the solar system, the player can walk/jump around on a miniature moon and observe the motions of the Earth and Sun. Built using OpenGL and C++.
+                </p>
+                <section class="blog-post-figure">
+                    <img src="images/moon_walk7.png">
+                    <span> Game Start </span>
+                </section>
+                <section class="blog-post-feature">
+                    <p>
+                        <b>Dynamic Reflections:</b>
+                        Objects reflect their surroundings in real time through cube mapping and planar reflections.
+                    </p>
+                    <section class="blog-post-figure">
+                        <img src="images/moon_walk2.png">
+                        <span> Cubemapped Reflection </span>
+                    </section>
+                    <section class="blog-post-figure">
+                        <img src="images/moon_walk3.png">
+                        <span> Planar Reflection </span>
+                    </section>
+                </section>
+                <section class="blog-post-feature">
+                    <p>
+                        <b>Eye Adaptation:</b>
+                        Emulates the eye's natural adaptation to environmental brightness through HDR and automatic exposure adjustment.
+                    </p>
+                    <section class="blog-post-figure">
+                        <img src="images/moon_walk4.png">
+                        <span> Before and After Exposure Adjustment</span>
+                    </section>
+                </section>
+                <section class="blog-post-feature">
+                    <p>
+                        <b>Bloom:</b>
+                        Emulates the glow effect of light sources through HDR and kernel blur.
+                    </p>
+                    <section class="blog-post-figure">
+                        <img src="images/moon_walk8.png">
+                        <span> Bloom on Rocket Flame </span>
+                    </section><section class="blog-post-figure">
+                        <img src="images/moon_walk5.png">
+                        <span> Bloom on Cutscene </span>
+                    </section>
+                </section>
+            </article>
+            <article class="card blog-post">
+                <header><h1>Contact</h1></header>
+                <p>
+                    Email: <a href="mailto: tim.fu00@gmail.com">tim.fu00@gmail.com</a>
+                </p>
+            </article>
+        </section>
+    </main>
+    <script src="src/blog.js"></script>
+    <script src="src/image-viewer.js"></script>
+</body>
+</html>
