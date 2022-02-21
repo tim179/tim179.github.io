@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Project Blog</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" type="text/css" media="screen" href="styles/main.css" />
+    <link rel="stylesheet" type="text/css" media="screen" href="styles/2048.css" />
+</head>
+<body>
+    <main>
+        <nav class="card">
+            <header>Projects</header>
+            <a href="movieflix.html">Movieflix</a>
+            <a href="moon_walk.html">Moon Walk</a>
+            <a href="quiz_maker.html">Quiz Maker</a>
+            <a href="2048.html" class="current">2048</a>
+        </nav>
+        <section id="blog" class="blog">
+            <article class="card blog-post">
+                <header><h1>2048</h1></header>
+                <p>
+                    A recreation of the game 2048
+                    (<a href="play2048.co">original</a> by Gabriele Cirulli).
+                    <br><br>
+                    <b>How to play:</b>
+                        Use the arrow keys to slide the tiles around on the board. Pairs of tiles with the same number will
+                        add together when they collide. Try to get a tile to 2048.
+                    
+                </p>
+                <section class="blog-post-feature">
+                    <article class="game-2048">
+                        <button class="restart-button" type="button" tabindex="0"> New Game </button>
+                        <section class="grid-2048" tabindex="0">
+                            <section class="game-screen hidden">
+                                <header></header>
+                                <button type="button" tabindex="0"></button>
+                            </section>
+                        </section>
+                    </article>
+                </section>
+            </article>
+        </section>
+    </main>
+    <script src="src/blog.js"></script>
+    <script src="src/2048.js"></script>
+</body>
+</html>

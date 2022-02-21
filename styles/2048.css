@@ -1,0 +1,223 @@
+.blog-post {
+	background-color: #faf8ef;
+	color: #424242;
+	padding: 5% 7% 10% 7%;
+	margin-bottom: 200px;
+}
+
+.blog-post > header {
+	font-size: 1.7rem;
+}
+
+.blog-post > p {
+	font-size: min(3.5vw, 1.1rem);
+}
+
+.hidden {
+	display: none !important;
+}
+
+.transition-off {
+  -webkit-transition: none !important;
+  -moz-transition: none !important;
+  -o-transition: none !important;
+  transition: none !important;
+}
+
+.game-2048 {
+	width: 100%;
+	display: flex;
+	flex-direction: column;
+	align-items: flex-end;
+}
+
+.game-2048 > .restart-button {
+	outline: none;
+	border: none;
+	background-color: #8f7a66;
+	border-radius: 3px;
+	padding: 1.6% 4%;
+	color:  #f9f6f2;
+	font-size: min(4vw, 1.5rem);
+	font-weight: bold;
+	cursor: pointer;
+	margin-bottom: 8%;
+}
+
+.grid-2048 {
+	box-sizing: border-box;
+	display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    grid-template-rows: repeat(4, 1fr);
+    justify-items: stretch;
+    gap: 2.98%;
+    width: 100%;
+    height: 100%;
+    padding: 2.93%;
+    /*gap: 21px;
+    width: 705px;
+    height: 705px;
+    padding: 22px;
+    border-radius:  10px;*/
+    border-radius: 1.33%;
+    background-color: #bbada0;
+    position: relative;
+    -webkit-transition: top 0.2s linear, left 0.2s linear, transform 0.1s linear;
+	-moz-transition: top 0.2s linear, left 0.2s linear, transform 0.1s linear;
+	-o-transition: top 0.2s linear, left 0.2s linear, transform 0.1s linear;
+	transition: top 0.2s linear, left 0.2s linear, transform 0.1s linear;
+}
+
+.grid-2048 > div {
+	border-radius: 3%;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	font-size: 5em;
+	font-weight: bold;
+	background-color: #ccc0b4;
+	color: #776e65;
+}
+
+.grid-2048 > .tile {
+	z-index: 1;
+	transition: inherit;
+}
+
+.grid-2048 > .tile-merged {
+	transform: scale(1.25);
+}
+
+.grid-2048 > .tile-new {
+	transform: scale(0);
+}
+
+.grid-2048 > .game-screen {
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+	z-index: 2;
+	border-radius: 0;
+	background-color: rgba(255, 255, 255, 0.25);
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+	opacity: 0;
+	-webkit-transition: opacity 0.5s linear;
+	-moz-transition: opacity 0.5s linear;
+	-o-transition: opacity 0.5s linear;
+	transition: opacity 0.5s linear;
+	touch-action: none;
+}
+
+.game-screen > header {
+	color:  #776e65;
+	font-size: 3.75em;
+	font-weight: bold;
+	margin-bottom: 8%;
+}
+
+.game-screen > button {
+	outline: none;
+	border: none;
+	background-color: #8f7a66;
+	border-radius: 3px;
+	padding: 1.6% 3.2%;
+	color:  #f9f6f2;
+	font-size: min(4vw, 1.5rem);;
+	font-weight: bold;
+	cursor: pointer;
+}
+
+.grid-2048 > .tile-2 {
+	background-color: #eee4da;
+	color: #776e65;
+}
+
+.grid-2048 > .tile-4 {
+	background-color: #eee1c9;
+	color: #776e65;
+}
+
+.grid-2048 > .tile-8 {
+	background-color: #f3b27a;
+	color: #f9f6f2;
+}
+
+.grid-2048 > .tile-16 {
+	background-color: #f69664;
+	color: #f9f6f2;
+}
+
+.grid-2048 > .tile-32 {
+	background-color: #f77c5f;
+	color: #f9f6f2;
+}
+
+.grid-2048 > .tile-64 {
+	background-color: #f75f3b;
+	color: #f9f6f2;
+}
+
+.grid-2048 > .tile-128 {
+	background-color: #edd073;
+	color: #f9f6f2;
+	font-size: 4.9em;
+}
+
+.grid-2048 > .tile-256 {
+	background-color: #edcc62;
+	color: #f9f6f2;
+	font-size: 4.9em;
+}
+
+.grid-2048 > .tile-512 {
+	background-color: #edc850;
+	color: #f9f6f2;
+	font-size: 4.9em;
+}
+
+.grid-2048 > .tile-1024 {
+	background-color: #edc43f;
+	color: #f9f6f2;
+	font-size: 4em;
+}
+
+.grid-2048 > .tile-2048 {
+	background-color: #edc32d;
+	color: #f9f6f2;
+	font-size: 4em;
+}
+
+.grid-2048 > .tile-4096 {
+	background-color: #edc32d;
+	color: #f9f6f2;
+	font-size: 4em;
+}
+
+.grid-2048 > .tile-8192 {
+	background-color: #edc32d;
+	color: #f9f6f2;
+	font-size: 4em;
+}
+
+.grid-2048 > .tile-16384 {
+	background-color: #edc32d;
+	color: #f9f6f2;
+	font-size: 3.2em;
+}
+
+.grid-2048 > .tile-32768 {
+	background-color: #edc32d;
+	color: #f9f6f2;
+	font-size: 3.2em;
+}
+
+.grid-2048 > .tile-65536 {
+	background-color: #edc32d;
+	color: #f9f6f2;
+	font-size: 3.2em;
+}
