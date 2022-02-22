@@ -9,6 +9,7 @@ let updates = [];
 let INPUT_ENABLED = true;
 let touchStart = {x: 0, y: 0};
 let touchEnd = {x: null, y: null};
+let swipeDistance;
 
 let tilePositions;
 const renderGrid = document.getElementsByClassName("grid-2048")[0];
@@ -53,6 +54,7 @@ function resizeHandler() {
             }
         }
     renderGrid.classList.remove("transition-off");
+    swipeDistance = tilePositions[0].getBoundingClientRect().width * 1.2;
     // restartButton.style.fontSize = parseFloat(gridStyle.width) * (16/500) + "px";
 }
 
@@ -75,18 +77,21 @@ function disableArrowScroll(e) {
 }
 
 function swipeHandler(e) {
-    if (!INPUT_ENABLED || !check()) return;
-    e.preventDefault();
+    // console.log(e);
     if (e.type === "touchstart") {
-        touchStart.x = e.touches[0].screenX;
-        touchStart.y = e.touches[0].screenY;
+        touchStart.x = e.touches[0].clientX;
+        touchStart.y = e.touches[0].clientY;
+        touchEnd.x = e.touches[0].clientX;
+        touchEnd.y = e.touches[0].clientY;
     } else if (e.type === "touchmove") {
-        touchEnd.x = e.touches[0].screenX;
-        touchEnd.y = e.touches[0].screenY;
-    } else {
-        if (!touchEnd.x || !touchEnd.y) return;
+        e.preventDefault();
+        touchEnd.x = e.touches[0].clientX;
+        touchEnd.y = e.touches[0].clientY;
+        if (!INPUT_ENABLED || !check()) return;
+
         let xDiff = touchEnd.x - touchStart.x;
         let yDiff = touchEnd.y - touchStart.y;
+        if (xDiff**2 + yDiff**2 < swipeDistance**2) return;
         if (Math.abs(xDiff) > Math.abs(yDiff)) {
             if (xDiff > 0) {
                 shiftRight();
@@ -100,12 +105,15 @@ function swipeHandler(e) {
                 shiftUp();
             }                                                                 
         }
-        touchEnd.x = null;
-        touchEnd.y = null;
+
         spawnRandom();
         render();
         INPUT_ENABLED = false;
-        setTimeout(() => {INPUT_ENABLED = true;}, TRANSITION_TIME + 10);
+        setTimeout(() => {
+            INPUT_ENABLED = true;
+            touchStart.x = touchEnd.x
+            touchStart.y = touchEnd.y
+        }, TRANSITION_TIME + 10);
     }
 }
 
