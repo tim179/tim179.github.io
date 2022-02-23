@@ -55,7 +55,7 @@ function resizeHandler() {
         }
     renderGrid.classList.remove("transition-off");
     swipeDistance = tilePositions[0].getBoundingClientRect().width * 1.2;
-    TRANSITION_TIME = Math.min(Math.max(parseFloat(gridStyle.width) * (200/705), 120), 200);
+    TRANSITION_TIME = Math.min(Math.max(parseFloat(gridStyle.width) * (200/705), 150), 200);
     renderGrid.style.transition = `top ${TRANSITION_TIME/1000}s linear, left ${TRANSITION_TIME/1000}s linear, transform 0.1s linear`;
     // restartButton.style.fontSize = parseFloat(gridStyle.width) * (16/500) + "px";
 }
