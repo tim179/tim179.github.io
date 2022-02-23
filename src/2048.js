@@ -1,7 +1,7 @@
 const MAX_NUM = 2048;
 const HEIGHT = 4;
 const WIDTH = 4;
-const TRANSITION_TIME = 200;
+let TRANSITION_TIME = 200;
 const MERGE_TIME = 100;
 const grid = [];
 
@@ -55,6 +55,8 @@ function resizeHandler() {
         }
     renderGrid.classList.remove("transition-off");
     swipeDistance = tilePositions[0].getBoundingClientRect().width * 1.2;
+    TRANSITION_TIME = Math.min(Math.max(parseFloat(gridStyle.width) * (200/705), 120), 200);
+    renderGrid.style.transition = `top ${TRANSITION_TIME/1000}s linear, left ${TRANSITION_TIME/1000}s linear, transform 0.1s linear`;
     // restartButton.style.fontSize = parseFloat(gridStyle.width) * (16/500) + "px";
 }
 
