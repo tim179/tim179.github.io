@@ -60,7 +60,7 @@ function resizeHandler() {
     // restartButton.style.fontSize = parseFloat(gridStyle.width) * (16/500) + "px";
 }
 
-function restartHandler(e) {
+function restartHandler() {
     for (let i = 0; i < HEIGHT; i++)
         for (let j = 0; j < WIDTH; j++)
             grid[i][j] = null;
@@ -69,6 +69,7 @@ function restartHandler(e) {
     spawnRandom();
     spawnRandom();
     render();
+    INPUT_ENABLED = true;
     gameScreen.classList.add("hidden");
     gameScreen.style.opacity = 0;
 }
@@ -348,19 +349,7 @@ function check() {
             button.innerHTML = "Try again";
         }
 
-		button.onclick = () => {
-			for (let i = 0; i < HEIGHT; i++)
-				for (let j = 0; j < WIDTH; j++)
-					grid[i][j] = null;
-            let tiles = renderGrid.querySelectorAll(".tile");
-            for (let tile of tiles) tile.remove();
-            spawnRandom();
-            spawnRandom();
-    		render();
-    		INPUT_ENABLED = true;
-    		gameScreen.classList.add("hidden");
-            gameScreen.style.opacity = 0;
-		};
+		button.onclick = restartHandler;
 	}
 
 	return canMove && maxNum != MAX_NUM;
