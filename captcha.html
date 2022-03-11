@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Project Blog</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" type="text/css" media="screen" href="styles/main.css" />
+    <link rel="stylesheet" type="text/css" media="screen" href="styles/image-viewer.css" />
+</head>
+<body>
+   <section id="image-modal" class="image-modal">
+        <section id="image-modal-content-box" class="image-modal-content-box">
+            <button class="close">&times</button>
+            <img>
+        </section>
+    </section>
+    <main>
+        <nav class="card">
+            <header>Projects</header>
+            <a href="movieflix.html">Movieflix</a>
+            <a href="moon_walk.html">Moon Walk</a>
+            <a href="quiz_maker.html">Quiz Maker</a>
+            <a href="2048.html">2048</a>
+            <a href="captcha.html" class="current">Captcha</a>
+        </nav>
+        <section id="blog" class="blog">
+            <article class="card blog-post">
+                <header><h1>Captcha Recognition</h1></header>
+                <p>
+                    Developed a personal neural network class and tested it on recognition of captcha digits.
+                    An example of a captcha digit is shown below.
+                </p>
+                <section class="blog-post-figure">
+                    <img src="images/captcha1.png">
+                    <span> Digit 9 </span>
+                </section>
+                <section class="blog-post-feature">
+                    <p>
+                        A 1000 captcha samples (a 100 per digit) have been split 80:20 (80% for training and 20% for testing).
+                        Below is the result of training a neural network with a sigmoid activation function and a squared error
+                        loss function. Each iteration denotes a weight update using a batch of 10 samples.
+                    </p>
+                    <section class="blog-post-figure">
+                        <img src="images/captcha2.png">
+                        <span> Figure 1 </span>
+                    </section>
+                </section>
+            </article>
+            <article class="card blog-post">
+                <header><h1>Contact</h1></header>
+                <p>
+                    Email: <a href="mailto: tim.fu00@gmail.com">tim.fu00@gmail.com</a>
+                </p>
+            </article>
+        </section>
+    </main>
+    <script src="src/blog.js"></script>
+    <script src="src/image-viewer.js"></script>
+</body>
+</html>
