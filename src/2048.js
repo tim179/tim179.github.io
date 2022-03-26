@@ -7,6 +7,7 @@ const grid = [];
 
 let updates = [];
 let INPUT_ENABLED = true;
+let CONTINUE_ENABLED = false;
 let touchStart = {x: 0, y: 0};
 let touchEnd = {x: null, y: null};
 let swipeDistance;
@@ -69,7 +70,16 @@ function restartHandler() {
     spawnRandom();
     spawnRandom();
     render();
+    CONTINUE_ENABLED = false;
     INPUT_ENABLED = true;
+    gameScreen.classList.add("hidden");
+    gameScreen.style.opacity = 0;
+}
+
+function continueHandler() {
+    CONTINUE_ENABLED = true;
+    INPUT_ENABLED = true;
+    gameScreen.classList.remove("won");
     gameScreen.classList.add("hidden");
     gameScreen.style.opacity = 0;
 }
@@ -334,25 +344,28 @@ function check() {
 			if (j+1 < WIDTH && grid[i][j+1] === grid[i][j]) canMove = true;
 		}
 	
-	if (maxNum === MAX_NUM || !canMove) {
-		INPUT_ENABLED = false;
-		gameScreen.classList.remove("hidden");
+	if ((maxNum === MAX_NUM && !CONTINUE_ENABLED) || !canMove) {
+        INPUT_ENABLED = false;
+        gameScreen.classList.remove("hidden");
         setTimeout(() => {gameScreen.style.opacity = 1;}, 100);
         let text = document.querySelector(".game-screen > header");
-		let button = document.querySelector(".game-screen > button");
+        let button = document.querySelector(".game-screen > button");
 
-        if (maxNum === MAX_NUM) {
+        if (maxNum === MAX_NUM && !CONTINUE_ENABLED) {
+            gameScreen.classList.add("won");
             text.innerHTML = "You win!";
             button.innerHTML = "Keep going";
+            button.onclick = continueHandler;
         } else {
             text.innerHTML = "Game over!";
             button.innerHTML = "Try again";
+            button.onclick = restartHandler;
         }
 
-		button.onclick = restartHandler;
-	}
+        return false;
+    }
 
-	return canMove && maxNum != MAX_NUM;
+    return true;
 }
 
 function spawnSpecial() {
