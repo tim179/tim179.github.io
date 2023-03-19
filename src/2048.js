@@ -13,23 +13,27 @@ let touchEnd = {x: null, y: null};
 let swipeDistance;
 
 let tilePositions;
-const renderGrid = document.getElementsByClassName("grid-2048")[0];
-const gameScreen = document.querySelector(".grid-2048 > .game-screen");
-const restartButton = document.querySelector(".game-2048 > .restart-button");
+const gameBox = document.getElementsByClassName("game-2048")[0];
+let renderGrid = undefined;
+let gameScreen = undefined;
+let restartButton = undefined;
 
 initGame();
 
 function initGame() {
+    initGameBoxElements();
+
     for (let i = 0; i < HEIGHT; i++)
         grid.push(Array(WIDTH).fill(null));
 
     for (let i = 0; i < HEIGHT; i++)
-		for (let j = 0; j < WIDTH; j++)
-			renderGrid.append(document.createElement("div"));
-
+        for (let j = 0; j < WIDTH; j++)
+            renderGrid.append(document.createElement("div"));
+        
     tilePositions = document.querySelectorAll(".grid-2048 > div");
-    document.addEventListener("keydown", keyHandler);
     document.addEventListener("keydown", disableArrowScroll);
+    document.addEventListener("keydown", keyHandler);
+    
     renderGrid.addEventListener("touchstart", swipeHandler);
     renderGrid.addEventListener("touchmove", swipeHandler);
     renderGrid.addEventListener("touchend", swipeHandler);
@@ -38,7 +42,31 @@ function initGame() {
     restartButton.addEventListener("click", restartHandler);
     spawnRandom();
     spawnRandom();
+    // spawnSpecial();
     render();
+}
+
+function initGameBoxElements() {
+    restartButton = document.createElement("button");
+    restartButton.className = "restart-button";
+    restartButton.type = "button";
+    restartButton.tabIndex = "0";
+    restartButton.textContent = "New Game"
+    gameBox.append(restartButton);
+
+    renderGrid = document.createElement("section");
+    renderGrid.className = "grid-2048";
+    renderGrid.tabIndex = "0";
+    gameBox.append(renderGrid);
+
+    gameScreen = document.createElement("section");
+    gameScreen.className = "game-screen hidden";
+    gameScreen.append(document.createElement("header"));
+    gameScreenButton = document.createElement("button");
+    gameScreenButton.type = "button";
+    gameScreenButton.tabIndex = "0";
+    gameScreen.append(gameScreenButton);
+    renderGrid.append(gameScreen);
 }
 
 function resizeHandler() {
@@ -56,9 +84,8 @@ function resizeHandler() {
         }
     renderGrid.classList.remove("transition-off");
     swipeDistance = tilePositions[0].getBoundingClientRect().width * 1.2;
-    TRANSITION_TIME = Math.min(Math.max(parseFloat(gridStyle.width) * (200/705), 150), 200);
+    TRANSITION_TIME = Math.min(Math.max(parseFloat(gridStyle.width) * (200/705), 120), 200);
     renderGrid.style.transition = `top ${TRANSITION_TIME/1000}s linear, left ${TRANSITION_TIME/1000}s linear, transform 0.1s linear`;
-    // restartButton.style.fontSize = parseFloat(gridStyle.width) * (16/500) + "px";
 }
 
 function restartHandler() {
@@ -85,12 +112,11 @@ function continueHandler() {
 }
 
 function disableArrowScroll(e) {
-	if (e && e.keyCode > 36 && e.keyCode < 41)
-		e.preventDefault();
+    if (e && e.keyCode > 36 && e.keyCode < 41)
+        e.preventDefault();
 }
 
 function swipeHandler(e) {
-    // console.log(e);
     if (e.type === "touchstart") {
         touchStart.x = e.touches[0].clientX;
         touchStart.y = e.touches[0].clientY;
@@ -132,134 +158,134 @@ function swipeHandler(e) {
 
 function keyHandler(e) {
     if (!INPUT_ENABLED || !check()) return;
-	if (e && e.keyCode > 36 && e.keyCode < 41) {
-		switch (e.keyCode) { 
-			case 37: 
-				shiftLeft();
-				break; 
-			case 38: 
-				shiftUp();
-				break; 
-			case 39: 
-				shiftRight(); 
-				break; 
-			case 40: 
-				shiftDown();
-				break; 
-		}
-		spawnRandom();
-		render();
+    if (e && e.keyCode > 36 && e.keyCode < 41) {
+        switch (e.keyCode) { 
+            case 37: 
+                shiftLeft();
+                break; 
+            case 38: 
+                shiftUp();
+                break; 
+            case 39: 
+                shiftRight(); 
+                break; 
+            case 40: 
+                shiftDown();
+                break; 
+        }
+        spawnRandom();
+        render();
         INPUT_ENABLED = false;
         setTimeout(() => {INPUT_ENABLED = true;}, TRANSITION_TIME + 10);
-	}
+    }
 }
 
 function shiftRight() {
-	// shift right and merge when hit matching block
-	for (let i = 0; i < HEIGHT; i++) {
-		let k = WIDTH-1;
-		// cannot consider any block >= wall for merging
-		let wall = WIDTH;
-		for (let j = WIDTH-1; j >= 0; j--) {
-			if (grid[i][j] !== null) {
-				let temp = grid[i][j];
-				grid[i][j] = null;
-				if (k + 1 < wall && temp === grid[i][k+1]) {
-					grid[i][k+1] += temp;
-					wall = k + 1;
+    // shift right and merge when hit matching block
+    for (let i = 0; i < HEIGHT; i++) {
+        let k = WIDTH-1;
+        // cannot consider any block >= wall for merging
+        let wall = WIDTH;
+        for (let j = WIDTH-1; j >= 0; j--) {
+            if (grid[i][j] !== null) {
+                let temp = grid[i][j];
+                grid[i][j] = null;
+                if (k + 1 < wall && temp === grid[i][k+1]) {
+                    grid[i][k+1] += temp;
+                    wall = k + 1;
                     updates.push({type: "merge", from: {row: i, col: j}, to: {row: i, col: k}, target: {row: i, col: k+1}});
-				} else {
-					grid[i][k] = temp;
+                } else {
+                    grid[i][k] = temp;
                     updates.push({type: "move", from: {row: i, col: j}, to: {row: i, col: k}});
-					k--;
-				}
-			}
-		}
-	}
+                    k--;
+                }
+            }
+        }
+    }
 }
 
 function shiftLeft() {
-	// shift left and merge when hit matching block
-	for (let i = 0; i < HEIGHT; i++) {
-		let k = 0;
-		// cannot consider any block <= wall for merging
-		let wall = -1;
-		for (let j = 0; j < WIDTH; j++) {
-			if (grid[i][j] !== null) {
-				let temp = grid[i][j];
-				grid[i][j] = null;
-				if (k - 1 > wall && temp === grid[i][k-1]) {
-					grid[i][k-1] += temp;
+    // shift left and merge when hit matching block
+    for (let i = 0; i < HEIGHT; i++) {
+        let k = 0;
+        // cannot consider any block <= wall for merging
+        let wall = -1;
+        for (let j = 0; j < WIDTH; j++) {
+            if (grid[i][j] !== null) {
+                let temp = grid[i][j];
+                grid[i][j] = null;
+                if (k - 1 > wall && temp === grid[i][k-1]) {
+                    grid[i][k-1] += temp;
                     updates.push({type: "merge", from: {row: i, col: j}, to: {row: i, col: k}, target: {row: i, col: k-1}});
-					wall = k - 1;
-				} else {
-					grid[i][k] = temp;
+                    wall = k - 1;
+                } else {
+                    grid[i][k] = temp;
                     updates.push({type: "move", from: {row: i, col: j}, to: {row: i, col: k}});
-					k++;
-				}
-			}
-		}
-	}
+                    k++;
+                }
+            }
+        }
+    }
 }
 
 function shiftUp() {
-	// shift up and merge when hit matching block
-	for (let j = 0; j < WIDTH; j++) {
-		let k = 0;
-		// cannot consider any block <= wall for merging
-		let wall = -1;
-		for (let i = 0; i < HEIGHT; i++) {
-			if (grid[i][j] !== null) {
-				let temp = grid[i][j];
-				grid[i][j] = null;
-				if (k - 1 > wall && temp === grid[k-1][j]) {
-					grid[k-1][j] += temp;
+    // shift up and merge when hit matching block
+    for (let j = 0; j < WIDTH; j++) {
+        let k = 0;
+        // cannot consider any block <= wall for merging
+        let wall = -1;
+        for (let i = 0; i < HEIGHT; i++) {
+            if (grid[i][j] !== null) {
+                let temp = grid[i][j];
+                grid[i][j] = null;
+                if (k - 1 > wall && temp === grid[k-1][j]) {
+                    grid[k-1][j] += temp;
                     updates.push({type: "merge", from: {row: i, col: j}, to: {row: k, col: j}, target: {row: k-1, col: j}});
-					wall = k - 1;
-				} else {
-					grid[k][j] = temp;
+                    wall = k - 1;
+                } else {
+                    grid[k][j] = temp;
                     updates.push({type: "move", from: {row: i, col: j}, to: {row: k, col: j}});
-					k++;
-				}
-			}
-		}
-	}
+                    k++;
+                }
+            }
+        }
+    }
 }
 
 function shiftDown() {
-	// shift down and merge when hit matching block
-	for (let j = 0; j < WIDTH; j++) {
-		let k = HEIGHT-1;
-		// cannot consider any block >= wall for merging
-		let wall = HEIGHT;
-		for (let i = HEIGHT-1; i >= 0; i--) {
-			if (grid[i][j] !== null) {
-				let temp = grid[i][j];
-				grid[i][j] = null;
-				if (k + 1 < wall && temp === grid[k+1][j]) {
-					grid[k+1][j] += temp;
+    // shift down and merge when hit matching block
+    for (let j = 0; j < WIDTH; j++) {
+        let k = HEIGHT-1;
+        // cannot consider any block >= wall for merging
+        let wall = HEIGHT;
+        for (let i = HEIGHT-1; i >= 0; i--) {
+            if (grid[i][j] !== null) {
+                let temp = grid[i][j];
+                grid[i][j] = null;
+                if (k + 1 < wall && temp === grid[k+1][j]) {
+                    grid[k+1][j] += temp;
                     updates.push({type: "merge", from: {row: i, col: j}, to: {row: k, col: j}, target: {row: k+1, col: j}});
-					wall = k + 1;
-				} else {
-					grid[k][j] = temp;
+                    wall = k + 1;
+                } else {
+                    grid[k][j] = temp;
                     updates.push({type: "move", from: {row: i, col: j}, to: {row: k, col: j}});
-					k--;
-				}
-			}
-		}
-	}
+                    k--;
+                }
+            }
+        }
+    }
 }
 
 function spawnRandom() {
-	let emptyCells = [];
-	for (let i = 0; i < HEIGHT; i++)
-		for (let j = 0; j < WIDTH; j++)
-			if (grid[i][j] === null) emptyCells.push([i, j]);
-	if (emptyCells.length === 0) return;
+    let emptyCells = [];
+    for (let i = 0; i < HEIGHT; i++)
+        for (let j = 0; j < WIDTH; j++)
+            if (grid[i][j] === null) emptyCells.push([i, j]);
+    if (emptyCells.length === 0) return;
 
-	let randNum = (getRandomInt(0,1) ? 2 : 4);
-	let idx = emptyCells[getRandomInt(0, emptyCells.length-1)];
-	grid[idx[0]][idx[1]] = randNum;
+    let randNum = (getRandomInt(0,1) ? 2 : 4);
+    let idx = emptyCells[getRandomInt(0, emptyCells.length-1)];
+    grid[idx[0]][idx[1]] = randNum;
     updates.push({type: "new", num: randNum, to: {row: idx[0], col: idx[1]}});
 }
 
@@ -277,7 +303,6 @@ function render() {
         } else if (update.type === "merge") {
             let tile = renderGrid.querySelector(`.tile-position-${update.from.row}-${update.from.col}`);
             tile.style.zIndex = "0";
-            // tile.style.opacity = "0";
             setTilePos(tile, update.target.row, update.target.col);
             setTimeout(() => {
                 tile.remove();
@@ -329,22 +354,22 @@ function setTileSize(tile, row, col) {
 }
 
 function check() {
-	let maxNum = 0;
-	let canMove = false;
-	for (let i = 0; i < HEIGHT; i++)
-		for (let j = 0; j < WIDTH; j++) {
-			if (grid[i][j] === null) {
-				canMove = true;
-				continue;
-			}
-			maxNum = Math.max(maxNum, grid[i][j]);
-			if (i-1 >= 0 && grid[i-1][j] === grid[i][j]) canMove = true;
-			if (i+1 < HEIGHT && grid[i+1][j] === grid[i][j]) canMove = true;
-			if (j-1 >= 0 && grid[i][j-1] === grid[i][j]) canMove = true;
-			if (j+1 < WIDTH && grid[i][j+1] === grid[i][j]) canMove = true;
-		}
-	
-	if ((maxNum === MAX_NUM && !CONTINUE_ENABLED) || !canMove) {
+    let maxNum = 0;
+    let canMove = false;
+    for (let i = 0; i < HEIGHT; i++)
+        for (let j = 0; j < WIDTH; j++) {
+            if (grid[i][j] === null) {
+                canMove = true;
+                continue;
+            }
+            maxNum = Math.max(maxNum, grid[i][j]);
+            if (i-1 >= 0 && grid[i-1][j] === grid[i][j]) canMove = true;
+            if (i+1 < HEIGHT && grid[i+1][j] === grid[i][j]) canMove = true;
+            if (j-1 >= 0 && grid[i][j-1] === grid[i][j]) canMove = true;
+            if (j+1 < WIDTH && grid[i][j+1] === grid[i][j]) canMove = true;
+        }
+    
+    if ((maxNum === MAX_NUM && !CONTINUE_ENABLED) || !canMove) {
         INPUT_ENABLED = false;
         gameScreen.classList.remove("hidden");
         setTimeout(() => {gameScreen.style.opacity = 1;}, 100);
